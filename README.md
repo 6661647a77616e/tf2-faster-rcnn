@@ -150,3 +150,5 @@ make sure download from Visual Studio Build Tools,Desktop development with C++ ,
 
 and add this into environment variables "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Tools\MSVC\<version>\bin\Hostx64\x64"
 
+chatgpt convo https://chatgpt.com/c/6788fed1-bf1c-8011-8beb-b55ab045d051
+
