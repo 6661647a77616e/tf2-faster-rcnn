@@ -33,14 +33,23 @@ In order to be compatible with original setup, this result shown here is initial
 2. Install denpendencies with virtual env `anaconda`
    This project is trained and tested under Python3.7, TensorFlow v2.2 and cudatoolkit 10.1.
    ```shell
-   conda create -n tf2 tensorflow-gpu cudatoolkit=10.1 
+   conda create -n tf2 tensorflow cudatoolkit=10.1 
    conda activate tf2
    conda install numpy opencv cython scipy lxml
+   ```
+
+   or can simply
+   ```shell
+   python -m venv tf2
+   tf2\\Scripts\\activate
+   pip install tensorflow numpy opencv cython scipy lxml
    ```
 3. Build CUDA NMS with Cython wrapper. This implementation uses CUDA NMS as default.
    i. Check your [GPU's compute capability](https://developer.nvidia.com/cuda-gpus) and modify `-arch=sm_86` in the `build.bat`.
    Here uses `sm_86` as an example (`-Xptxas="-v"` is optional for showing register and smem usage):
+   also run this code in admin privilages
    ```shell
+   cd model/utils/nms/gpu
    nvcc -lib -O3 -arch=sm_86 -Xptxas="-v" -o nms_kernel.lib gpu_nms.cu
    ```
    ii.Run the following commands: 
@@ -127,3 +136,17 @@ Also feel free to pull requests and open an issue if you have any problem!
 ## Appendix
 Faster R-CNN Model Structure:
 ![structure](imgs/structure.jpg)
+
+
+----
+
+
+if running this code got this error
+```powershell
+nvcc fatal   : Cannot find compiler 'cl.exe' in PATH
+```
+
+make sure download from Visual Studio Build Tools,Desktop development with C++ , MSVC v142 - VS 2019 C++ x64/x86 build tools (or later versions if needed), Windows 10 SDK (or the SDK version that matches your system)
+
+and add this into environment variables "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\VC\Tools\MSVC\<version>\bin\Hostx64\x64"
+
